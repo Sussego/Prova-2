@@ -33,21 +33,15 @@ def calcular_ex_taylor_com_decomposicao(x, epsilon):
     :param epsilon: Limiar de precisão para interrupção do cálculo
     :return: Aproximação de e^x e número de termos usados
     """
-    LIMITE = 709  # Limite para evitar overflow em math.exp
-    
-    # Separa numerador do denomiinador
-    if abs(x) > LIMITE:
-        inteiro = int(x)
-        fracao = x - inteiro
+    #Divide nominador e denominador
+    inteiro = int(x)
+    fracao = x - inteiro
         
-        # Decomposição exponencial: e^x = e^(parte inteira) * e^(parte fracionária)
-        resultado_inteiro, num_termos_inteiro = calcular_ex_taylor(inteiro, epsilon)
-        resultado_fracao, num_termos_fracao = calcular_ex_taylor(fracao, epsilon)
+    # Decomposição exponencial: e^x = e^(parte inteira) * e^(parte fracionária)
+    resultado_inteiro, num_termos_inteiro = calcular_ex_taylor(inteiro, epsilon)
+    resultado_fracao, num_termos_fracao = calcular_ex_taylor(fracao, epsilon)
         
-        return resultado_inteiro * resultado_fracao, num_termos_inteiro + num_termos_fracao
-    else:
-        # Para valores dentro do limite, calculamos diretamente
-        return calcular_ex_taylor(x, epsilon)
+    return resultado_inteiro * resultado_fracao, num_termos_inteiro + num_termos_fracao
 
 
 if __name__ == "__main__":
